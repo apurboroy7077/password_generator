@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      .enter_length_text {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .length_input,
+      .password {
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-size: 1.3rem;
+      }
+      .container {
+        background-color: lawngreen;
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 20px;
+        border: 5px solid black;
+        border-radius: 10px;
+      }
+      .enter_button {
+        border: 3px solid black;
+        padding: 5px;
+        margin: 5px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-size: 1.3rem;
+        border-radius: 5px;
+      }
+      .enter_button:hover {
+        background-color: red;
+        color: white;
+        box-shadow: 5px 5px 30px white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p class="enter_length_text">Enter Length</p>
+      <input type="text" class="length_input" placeholder="Enter Length" />
+      <br />
+      <input
+        type="text"
+        class="password"
+        placeholder="Password will appear here"
+      />
+      <br />
+      <button type="sumbit" class="enter_button">Enter</button>
+    </div>
+    <script>
+      let button = document.getElementsByClassName("enter_button")[0];
+      let length_input = document.getElementsByClassName("length_input")[0];
+      let password_show = document.getElementsByClassName("password")[0];
+      let generate = () => {
+        let length = length_input.value;
+        class password_class {
+          create(length) {
+            let characters = "qwertyuiopasdfghjklzxcvbnm";
+            let numbers = "1234567890";
+            let special = "!@#$%^&*()_+";
+            let pass = "";
+            for (let i = 0; i < length; i++) {
+              pass =
+                pass +
+                characters[Math.floor(Math.random() * characters.length)];
+              pass = pass + numbers[Math.floor(Math.random() * numbers.length)];
+              pass = pass + special[Math.floor(Math.random() * special.length)];
+            }
+            pass = pass.substr(0, length);
+            return pass;
+          }
+        }
+        let pass = new password_class();
+        let my_password = pass.create(length);
+        function shuffleString(inputString) {
+          const charArray = inputString.split("");
+          for (let i = charArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [charArray[i], charArray[j]] = [charArray[j], charArray[i]]; // Swap elements
+          }
+          const shuffledString = charArray.join("");
+          return shuffledString;
+        }
+        my_password = shuffleString(my_password);
+        password_show.value = my_password;
+      };
+      button.addEventListener("click", generate);
+    </script>
+  </body>
+</html>
